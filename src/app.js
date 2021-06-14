@@ -28,6 +28,8 @@ app.get('/', (req , res)=>{
 app.get('/register', (req, res) =>{
     res.render("register")
 })
+
+
 app.get('/login', (req, res) =>{
     res.render("login")
 })
@@ -35,7 +37,7 @@ app.get('/login', (req, res) =>{
 // create a new user in database
 app.post('/register', async(req, res) =>{
     try{
-        const password = req.body.password
+        const password = req.body.password 
         const cpassword = req.body.cnpassword
 
         if(password === cpassword){
@@ -53,10 +55,32 @@ app.post('/register', async(req, res) =>{
             const registered = await registerEmployee.save();
             res.status(201).render('index')
         }else{
-            res.send("Password not matching")
+            res.send("information not matching")
         }
     }catch(e){
         res.status(400).send(e);
+    }
+})
+
+
+// login check
+
+app.post('/login', async(req, res) =>{
+    try{
+
+        const email = req.body.email;
+        const password = req.body.password;
+        
+        const userEmail = await Register.findOne({email: email});
+
+        if(userEmail.password === password){
+            res.status(200).render('index')
+        }else{
+            res.send('Email or Password not matching please go back and try again')
+        }
+
+    }catch(e){
+        res.status(400).send('invalid email')
     }
 })
 
