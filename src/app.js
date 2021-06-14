@@ -28,6 +28,9 @@ app.get('/', (req , res)=>{
 app.get('/register', (req, res) =>{
     res.render("register")
 })
+app.get('/login', (req, res) =>{
+    res.render("login")
+})
 
 // create a new user in database
 app.post('/register', async(req, res) =>{
