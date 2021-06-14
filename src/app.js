@@ -4,6 +4,7 @@ const app = express();
 const hbs = require("hbs")
 
 require('./db/conn');
+const Register = require("./models/register")
 
 
 const port = process.env.PORT || 3000;
@@ -23,6 +24,16 @@ app.get('/', (req , res)=>{
 
 app.get('/register', (req, res) =>{
     res.render("register")
+})
+
+// create a new user in database
+app.post('/register', async(req, res) =>{
+    try{
+        
+
+    }catch(e){
+        res.status(400).send(e);
+    }
 })
 
 
